@@ -56,14 +56,15 @@ export default function LoginForm() {
                         </label>
                         <button type="submit" className="bg-emerald-600 w-24 h-9 text-white font-bold rounded-lg shadow-md shadow-emerald-800 hover:bg-emerald-500 ">Login</button>
                         {(() => {
-                            if (isError) {
-                                const mes = error?.response?.data as { message: string };
+                            if (isError && error?.response?.data) {
+                                const mes = error.response.data as { message: string };
                                 return (
-                                <span className="text-red-600 text-xs">
-                                    error: {mes.message || "An unexpected error occurred"}
-                                </span>
-                                );}
-                            return ""; 
+                                    <span className="text-red-600 text-xs">
+                                        error: {mes.message || "An unexpected error occurred"}
+                                    </span>
+                                );
+                            }
+                            return null;
                         })()}
                     </Form>
                 )
