@@ -4,6 +4,7 @@ import { TODO_URL } from "../../services/api";
 import Pagination from "./components/Pagination";
 import TaskCard from "./components/TaskCard";
 import DeleteModal from "./components/DeleteModal";
+import EditModal from "./components/EditModal";
 
 interface taskType { 
   id:number;
@@ -15,9 +16,11 @@ interface taskType {
 export default function HomePage() {
   const [page,setPage]=useState(0)
   const [open, setOpen] = useState(false);
-  const [selected, setSelected] = useState({});
+  const [openEdit, setOpenEdit] = useState(false);
+  const [selected, setSelected] = useState({id:0,todo:"",completed:false,userId:0});
 
   const handleClose = () => setOpen(false);
+  const handleCloseEdit = () => setOpenEdit(false);
  
   const {data,isLoading,isError,refetch}=useGet(`${TODO_URL}?limit=10&skip=${page}`)
 
@@ -49,7 +52,7 @@ export default function HomePage() {
           data?.todos?.map((task:taskType)=>{
             return(
               <>
-                <TaskCard key={task.id} task={task} openModal={o => setOpen(o)} selectedTask={s=>setSelected(s)}/>
+                <TaskCard key={task.id} task={task} openModal={o => setOpen(o)} openEditModal={o => setOpenEdit(o)} selectedTask={s=>setSelected(s)}/>
                   
               </>
               
@@ -61,6 +64,7 @@ export default function HomePage() {
         <Pagination  totalPage={totalPage} pageNumber={page} pageCounter={p => setPage(p)}/>
       </div>
       <DeleteModal open={open} handleClose={handleClose} task={selected}/>
+      <EditModal open={openEdit} handleClose={handleCloseEdit} task={selected}/>
 
     </div>
   )

@@ -1,6 +1,7 @@
 import {IconButton } from "@mui/material";
 import { MdModeEdit, MdDeleteForever  } from "react-icons/md";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import EditIcon from '@mui/icons-material/Edit';
 
 interface taskType { 
   id:number;
@@ -11,14 +12,19 @@ interface taskType {
 interface propsType {
   task:taskType;
   openModal:(o:boolean)=>void;
+  openEditModal:(o:boolean)=>void;
   selectedTask:(s:taskType)=>void
 }
 
-export default function TaskCard({task , openModal,selectedTask}:propsType) {
+export default function TaskCard({task , openModal,openEditModal,selectedTask}:propsType) {
     const complete:boolean=task.completed
     const handleDel = () => {
       selectedTask(task)
       openModal(true);
+    }
+    const handleEdit = () => {
+      selectedTask(task)
+      openEditModal(true);
     }
   return (
     <div className="flex bg-gray-50 w-[440px] sm:w-[560px] lg:w-[440px] xl:w-[560px] mx-auto  items-center justify-between rounded-xl border border-gray-100 shadow-lg shadow-gray-200 px-4 py-2 gap-6 h-20">
@@ -33,7 +39,9 @@ export default function TaskCard({task , openModal,selectedTask}:propsType) {
         </div>
 
         <div className="flex gap-2 items-center text-xl">
-            <MdModeEdit className="text-yellow-600 hover:text-yellow-500 cursor-pointer transition"/>
+            <IconButton aria-label="edit" color="primary" onClick={handleEdit}>
+              <EditIcon />
+            </IconButton>
       
             <IconButton aria-label="delete" color="error" onClick={handleDel}>
               <DeleteForeverIcon />
