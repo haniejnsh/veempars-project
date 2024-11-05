@@ -1,14 +1,26 @@
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { TextField, Button, RadioGroup, FormControlLabel, Radio, Box } from '@mui/material';
+import useAdd from '../../../hooks/useAdd';
+
+interface taskType{
+    todo:string;
+    userId:number;
+    completed:boolean;
+}
 
 export default function AddForm() {
-
+    const {mutate}=useAdd()
   return (
     <Formik
-        initialValues={{todo:"",completed:"",userId:"" }}
+        initialValues={{todo:"",completed:"",userId:0 }}
         onSubmit={(values,{ resetForm }) => {
-            console.log(values);
+            const task:taskType={
+                todo:values.todo,
+                userId:values.userId,
+                completed:(values.completed=="true")?true:false,
+            }  
+            mutate(task) 
             resetForm()
         }}
         validationSchema={
@@ -21,7 +33,7 @@ export default function AddForm() {
         validateOnChange={false} 
         validateOnBlur={false}
     >
-      {({ values, handleChange, handleBlur, errors, touched }) => (
+      {({ values, handleChange, errors }) => (
         <Form>
         <Box sx={{
             display:"flex",
