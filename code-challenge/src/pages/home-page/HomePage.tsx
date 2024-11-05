@@ -15,6 +15,7 @@ interface taskType {
 export default function HomePage() {
   const [page,setPage]=useState(0)
   const [open, setOpen] = useState(false);
+  const [selected, setSelected] = useState({});
 
   const handleClose = () => setOpen(false);
  
@@ -48,7 +49,8 @@ export default function HomePage() {
           data?.todos?.map((task:taskType)=>{
             return(
               <>
-                <TaskCard key={task.id} task={task} openModal={o => setOpen(o)}/>
+                <TaskCard key={task.id} task={task} openModal={o => setOpen(o)} selectedTask={s=>setSelected(s)}/>
+                  
               </>
               
             )
@@ -58,7 +60,7 @@ export default function HomePage() {
       <div className="py-4">
         <Pagination  totalPage={totalPage} pageNumber={page} pageCounter={p => setPage(p)}/>
       </div>
-      <DeleteModal open={open} handleClose={handleClose}/>
+      <DeleteModal open={open} handleClose={handleClose} task={selected}/>
 
     </div>
   )
