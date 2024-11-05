@@ -21,7 +21,6 @@ export default function HomePage() {
 
   const handleClose = () => setOpen(false);
   const handleCloseEdit = () => setOpenEdit(false);
- 
   const {data,isLoading,isError,refetch}=useGet(`${TODO_URL}?limit=10&skip=${page}`)
 
   useEffect(
