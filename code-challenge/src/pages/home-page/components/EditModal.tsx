@@ -98,10 +98,10 @@ export default function EditModal({open,handleClose,task}:propsType) {
                                 fontSize: '15px', 
                                 '& .MuiOutlinedInput-notchedOutline': {
                                 borderColor: 'gray',
-                            },
-                            '&:hover .MuiOutlinedInput-notchedOutline': {
+                                },
+                                '&:hover .MuiOutlinedInput-notchedOutline': {
                                 borderColor: '#ccc038',
-                            },
+                                },
                             }
                         },
                     }}
