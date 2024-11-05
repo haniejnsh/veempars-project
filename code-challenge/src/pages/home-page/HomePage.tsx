@@ -3,6 +3,7 @@ import useGet from "../../hooks/useGet";
 import { TODO_URL } from "../../services/api";
 import Pagination from "./components/Pagination";
 import TaskCard from "./components/TaskCard";
+import DeleteModal from "./components/DeleteModal";
 
 interface taskType { 
   id:number;
@@ -13,7 +14,9 @@ interface taskType {
 
 export default function HomePage() {
   const [page,setPage]=useState(0)
-  
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => setOpen(false);
  
   const {data,isLoading,isError,refetch}=useGet(`${TODO_URL}?limit=10&skip=${page}`)
 
@@ -44,7 +47,10 @@ export default function HomePage() {
         {
           data?.todos?.map((task:taskType)=>{
             return(
-              <TaskCard key={task.id} task={task}/>
+              <>
+                <TaskCard key={task.id} task={task} openModal={o => setOpen(o)}/>
+              </>
+              
             )
           })
         }
@@ -52,6 +58,7 @@ export default function HomePage() {
       <div className="py-4">
         <Pagination  totalPage={totalPage} pageNumber={page} pageCounter={p => setPage(p)}/>
       </div>
+      <DeleteModal open={open} handleClose={handleClose}/>
 
     </div>
   )
