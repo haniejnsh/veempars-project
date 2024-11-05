@@ -1,5 +1,6 @@
 import useGet from "../../hooks/useGet";
 import { TODO_URL } from "../../services/api";
+import Pagination from "./components/Pagination";
 import TaskCard from "./components/TaskCard";
 
 interface taskType { 
@@ -12,7 +13,7 @@ interface taskType {
 export default function HomePage() {
   
  
-  const {data,isLoading,isError}=useGet(`${TODO_URL}s?limit=10&skip=10`)
+  const {data,isLoading,isError}=useGet(`${TODO_URL}?limit=10&skip=10`)
   if(isLoading){
     return(
       <div className="text-emerald-600 flex w-full items-center justify-center text-xl pt-20 font-bold" >is loading . . .</div>
@@ -39,7 +40,9 @@ export default function HomePage() {
           })
         }
       </div>
-      
+      <div className="py-4">
+        <Pagination/>
+      </div>
 
     </div>
   )
