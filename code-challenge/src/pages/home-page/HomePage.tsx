@@ -12,15 +12,15 @@ interface taskType {
 export default function HomePage() {
   
  
-  const {data,isLoading,isError}=useGet(`${TODO_URL}?limit=10&skip=10`)
+  const {data,isLoading,isError}=useGet(`${TODO_URL}s?limit=10&skip=10`)
   if(isLoading){
     return(
-      <div>is loading</div>
+      <div className="text-emerald-600 flex w-full items-center justify-center text-xl pt-20 font-bold" >is loading . . .</div>
     )
   }
   if(isError){
     return(
-      <div>Error</div>
+      <div className="text-red-600 flex w-full items-center justify-center text-xl pt-20 font-bold">Error occurred</div>
     )
   }
   console.log(data,data?.todos);
