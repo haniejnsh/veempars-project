@@ -1,6 +1,6 @@
-import { Box, Button,  FormControlLabel,  FormLabel,  Modal, Radio, RadioGroup, TextField, Typography } from "@mui/material";
-import useDelete from "../../../hooks/useDelete";
+import { Box, Button,FormControlLabel,Modal,Radio,RadioGroup, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
+import useEdit from "../../../hooks/useEdit";
 
 interface taskType { 
     id:number;
@@ -12,6 +12,13 @@ interface propsType {
     open: boolean;
     handleClose: () => void;
     task:taskType;
+}
+interface editTaskType {
+    id: number;
+    information: {
+        completed: boolean;
+        todo: string;
+    };
 }
 const style = {
     position: 'absolute',
@@ -31,8 +38,7 @@ const style = {
 
 export default function EditModal({open,handleClose,task}:propsType) {
     const {id,todo,completed}=task
-    console.log("ini",todo);
-    
+    const {mutate}=useEdit()
     const [inputValue,setInputValue]=useState("")
     useEffect(
        ()=> {setInputValue(todo) },
@@ -49,14 +55,20 @@ export default function EditModal({open,handleClose,task}:propsType) {
             } },
         [completed]
     )
-    console.log("radio=>",radioValue,"-----","text=>",inputValue);
     
 
-    const handleChangeRadio = (e) => {
+    const handleChangeRadio = (e: React.ChangeEvent<HTMLInputElement>) => {
         setRadioValue(e.target.value);
     };
     const handleEdit=()=>{
-        alert("edit")
+        const editTask:editTaskType={
+            id,
+            information:{
+                completed:(radioValue=="true")?true:false,
+                todo:inputValue,
+            }
+        }
+        mutate(editTask)
         handleClose()
     }
 

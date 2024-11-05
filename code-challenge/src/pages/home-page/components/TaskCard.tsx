@@ -1,5 +1,4 @@
 import {IconButton } from "@mui/material";
-import { MdModeEdit, MdDeleteForever  } from "react-icons/md";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
 
@@ -27,7 +26,7 @@ export default function TaskCard({task , openModal,openEditModal,selectedTask}:p
       openEditModal(true);
     }
   return (
-    <div className="flex bg-gray-50 w-[440px] sm:w-[560px] lg:w-[440px] xl:w-[560px] mx-auto  items-center justify-between rounded-xl border border-gray-100 shadow-lg shadow-gray-200 px-4 py-2 gap-6 h-20">
+    <div className="flex bg-gray-50 w-[98%] xs:w-[440px] sm:w-[560px] lg:w-[440px] xl:w-[560px] mx-auto  items-center justify-between rounded-xl border border-gray-100 shadow-lg shadow-gray-200 px-4 py-2 gap-6 h-20">
 
         <div className={`${complete?"bg-emerald-500 hover:bg-emerald-400":"hover:bg-emerald-100"} border border-gray-500 min-w-4 w-4 h-4 mr-2 rounded-full transition cursor-pointer`}></div>
 

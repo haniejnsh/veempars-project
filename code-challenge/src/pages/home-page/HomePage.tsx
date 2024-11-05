@@ -44,7 +44,7 @@ export default function HomePage() {
   const totalPage:number=Math.ceil(dataTotal/10) 
   return (
     <div className="flex flex-col w-full items-center  pt-10 pb-6 px-8 gap-8">
-      <h1 className="text-2xl font-bold text-emerald-800">
+      <h1 className="text-2xl font-bold text-emerald-800 mt-6 mb-8">
         All tasks
       </h1>
       <div className="grid grid-cols-1 lg:grid-cols-2 w-full gap-6">
